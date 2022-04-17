@@ -1,14 +1,13 @@
-const db = require('mongoose');
-db.Promise = global.Promise;
+const { Sequelize } = require('sequelize');
+const { database, dataBase } = require('./config');
 
-async function connect(url){
-    await db.connect(url, {
-        useNewUrlParser: true,
-    })
-    .then(() => {
-        console.log('[db] conectada con exito')
-    })
-    .catch(error => console.error('[db]', error));
-};
+const sequelize = new Sequelize(
+    dataBase.database,
+    dataBase.username,
+    dataBase.password, {
+        host: dataBase.host,
+        dialect: "mysql"
+    }
+);
 
-module.exports = connect;
+module.exports = sequelize;

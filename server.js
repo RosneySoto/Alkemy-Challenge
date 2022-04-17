@@ -1,18 +1,27 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
-const db = require('./db');
 const bodyParser = require('body-parser');
-const router = require('./network/routes');
+const routes = require('./network/routes');
 
-db('mongodb+srv://admin:123456789*@cluster0.upw4q.mongodb.net/test');
+const sequelize = require('./db')
+
+const PORT = process.env.PORT || 8080;
+
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended: true}));
 
-router(app);
+routes(app);
 app.use('/api', express.static('public'));
 
+server.listen(PORT, function(){
+    console.log(`Ejecutando en el puerto http://localhost:${PORT}`);
 
-server.listen(8080, function(){
-    console.log('Ejecutando en el puerto http://localhost:8080');
+    sequelize.sync({ force: false})
+        .then(() => {
+            console.log('Nos conectamos a la base de datos correctamente')
+        })
+        .catch(err => {
+            console.log('Se ha producido un error al conectar la base de datos ' + err)
+        })
 })

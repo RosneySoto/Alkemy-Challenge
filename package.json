@@ -2,7 +2,7 @@
   "name": "alkemychallenge",
   "version": "1.0.0",
   "description": "challenge de increso para alkemy, backend nodejs ",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,9 +15,11 @@
     "peliculas"
   ],
   "author": "Jose Rosney Alvarez Soto",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.17.3",
-    "mongoose": "^6.2.10"
+    "mongoose": "^6.2.10",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.18.0"
   }
 }
