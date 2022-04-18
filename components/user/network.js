@@ -4,8 +4,8 @@ const router = express.Router();
 const User = require('./model');
 const controller = require('./controller');
 
-router.post('/user', function(req, res){
-    controller.addUser(req.body.name, req.body.lastname, req.body.email, req.body.password, req.body.createdAt, req.body.updatedAt)
+router.post('/', function(req, res){
+    controller.addUser(req.body.name, req.body.lastName, req.body.email, req.body.password)
     .then(data => {
         response.success(req, res, data, 201);
     })

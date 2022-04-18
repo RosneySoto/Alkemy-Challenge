@@ -1,16 +1,14 @@
 const store = require('./store');
 
-function addUser(name, lastname, email, password){
-    if(!name || !lastname || !email || !password || !createdAt || !updatedAt){
+function addUser(name, lastName, email, password){
+    if(!name || !lastName || !email || !password){
         return Promise.reject('Debe ingresar, nombre, apellido, email y password')
     }
     const user = {
         name,
-        lastname,
+        lastName,
         email,
-        password,
-        createdAt,
-        updatedAt
+        password
     };
     return store.addUser(user);
 };
