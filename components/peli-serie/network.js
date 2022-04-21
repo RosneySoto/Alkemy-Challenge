@@ -27,4 +27,24 @@ router.get('/', function(req, res){
         })
 });
 
+router.patch('/', function(req, res){
+    controller.updateFilm(req.body)
+        .then(data =>{
+            response.success(req, res, data, 200);
+        })
+        .catch(err => {
+            response.error(req, res, 'Error al editar la pelicula o serie', 500, err)
+        })
+});
+
+router.delete('/:id', function(req, res){
+    controller.deleteFilm(req.params.id)
+        .then(data => {
+            response.success(req, res, data, 200)
+        })
+        .catch(err =>{
+            response.error(req, res, 'Error al eliminar la pelicula', 500, err)
+        })
+});
+
 module.exports = router;

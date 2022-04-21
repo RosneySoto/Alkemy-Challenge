@@ -1,18 +1,49 @@
 const Model = require('./model');
 
 function addCharacter (character){
-    const newCharacter = new Model(character);
-    return newCharacter.save();
+    try {
+        const newCharacter = Model.create({
+            image: character.image,
+            name: character.name,
+            age: character.age,
+            weight: character.weight,
+            history: character.history,
+                films:[
+                    {
+                        image: character.image,
+                        title: character.title,
+                        creationDate: character.creationDate,
+                        calification: character.calification,
+                    }
+                ]
+        },{
+            include: 'films'
+        });
+        return newCharacter;
+
+    } catch (error) {
+        console.log(error);
+    return {
+      status: 500,
+      message: 'Error al crear el personaje',
+      detail: error
+    };
+    }
+    
+    // const newCharacter = new Model(character);
+    // return newCharacter.save();
+};
+
+async function getAllCharacterOnlyImageandName(){
+    const character = await Model.findAll(
+        {
+            attributes: ['image', 'name']
+        });
+    return character;
 };
 
 async function getAllCharacter(){
-    const character = await Model.findAll({
-        include: [
-            {
-                association: Model.Film
-            }
-        ]
-    });
+    const character = await Model.findAll();
     return character;
 }
 
@@ -53,5 +84,6 @@ module.exports = {
     getAllCharacter,
     getCharacterByName,
     deleteCharacter,
-    updateCharacter
+    updateCharacter,
+    getAllCharacterOnlyImageandName,
 }

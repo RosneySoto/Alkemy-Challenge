@@ -16,13 +16,13 @@ Film.init({
         defaultValue: DataTypes.NOW
     },
     calification:{
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        validate: {min: 1, max: 5}
     }
 },{
     sequelize,
-    modelName: 'film'
+    modelName: 'film',
+    timestamps: false
 });
-
-// Film.belongsToMany(Character, {through: Character_Films});
 
 module.exports = Film;

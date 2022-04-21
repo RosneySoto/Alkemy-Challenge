@@ -24,4 +24,24 @@ router.get('/', function(req, res){
         })
 });
 
+router.delete('/:id', function(req, res){
+    controller.deleteUser(req.params.id)
+        .then(data =>{
+            response.success(req, res, data, 200)
+        })
+        .catch(err =>{
+            response.error(req, res, 'Error al eliminar usuario', 500, err)
+        })
+});
+
+router.patch('/', function(req, res){
+    controller.updateUser(req.body)
+        .then(data =>{
+            response.success(req, res, data, 200)
+        })
+        .catch(err =>{
+            response.error(req, res, 'Error al editar usuario', 500, err)
+        })
+});
+
 module.exports = router;

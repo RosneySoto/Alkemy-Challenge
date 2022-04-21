@@ -1,6 +1,5 @@
 const { Model, DataTypes} = require('sequelize');
 const sequelize = require('../../db');
-const Film = require('../peli-serie/model');
 
 class Character extends Model {}
 Character.init({
@@ -23,11 +22,8 @@ Character.init({
     }
 },{
     sequelize,
-    modelName: 'character'
+    modelName: 'character',
+    timestamps: false,
 });
-
-const Character_Films = sequelize.define('Character_Films', {}, {timestamps: false});
-Character.belongsToMany(Film, {through: Character_Films});
-Film.belongsToMany(Character, {through: Character_Films});
 
 module.exports = Character;

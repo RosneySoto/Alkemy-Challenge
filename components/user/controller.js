@@ -16,10 +16,31 @@ function addUser(name, lastName, email, password){
 async function getAll(){
     return new Promise((resolve, reject) => {
         resolve(store.getAllUser());
-    })
-}
+    });
+};
+
+async function deleteUser(id){
+    return new Promise((resolve, reject) =>{
+        resolve(store.deleteUser(id))
+    });
+};
+
+async function updateUser(user){
+    try {
+        if(!user){
+            return Promise.reject('Es obligatorio el titulo')
+        }
+        return new Promise((resolve, reject) =>{
+            resolve(store.updateUser(user));
+        })
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 module.exports = {
     addUser,
     getAll,
+    deleteUser,
+    updateUser
 }

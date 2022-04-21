@@ -4,7 +4,7 @@ const response = require('../../network/response');
 const controller = require('./controller');
 
 router.post('/', function(req, res){
-    controller.addCharacter(req.body.image, req.body.name, req.body.age, req.body.weight, req.body.history, req.body.filmId)
+    controller.addCharacter(req.body)
         .then(data => {
             response.success(req, res, data, 201);
         })
@@ -16,7 +16,17 @@ router.post('/', function(req, res){
 router.get('/', function(req, res){
     controller.getAll()
         .then(data => {
-            response.success(req, res, data, 201);
+            response.success(req, res, data, 200);
+        })
+        .catch(err => {
+            response.error(req, res, 'Error al listar la lista de personajes', 500, err)
+        })
+});
+
+router.get('/character', function(req, res){
+    controller.getAllOnlyNameandImage()
+        .then(data => {
+            response.success(req, res, data, 200);
         })
         .catch(err => {
             response.error(req, res, 'Error al listar la lista de personajes', 500, err)

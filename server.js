@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const routes = require('./network/routes');
 
 const sequelize = require('./db')
+require('./associations');
 
 const PORT = process.env.PORT || 8080;
 
