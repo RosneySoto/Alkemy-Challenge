@@ -14,13 +14,17 @@ router.post('/', function(req, res){
 });
 
 router.get('/', function(req, res){
-    controller.getAll()
-        .then(data => {
-            response.success(req, res, data, 200);
-        })
-        .catch(err => {
-            response.error(req, res, 'Error al listar la lista de personajes', 500, err)
-        })
+  const name = req.query.name;
+  const age = req.query.age;
+  const movies = req.query.movies;
+  const weight = req.query.weight;
+
+    controller.getAll(name, age, movies, weight).then(data => {
+        response.success(req, res, data, 200);
+    })
+    .catch(err => {
+        response.error(req, res, 'Error al listar la lista de personajes', 500, err)
+    })
 });
 
 router.get('/character', function(req, res){
@@ -30,16 +34,6 @@ router.get('/character', function(req, res){
         })
         .catch(err => {
             response.error(req, res, 'Error al listar la lista de personajes', 500, err)
-        })
-});
-
-router.get('/:name', function(req, res){
-    controller.getCharacterByName(req.params.name)
-        .then(data => {
-            response.success(req, res, data, 200);
-        })
-        .catch(err => {
-            response.error(req, res, 'Error al bucar el personaje por nombre', 500, err)
         })
 });
 

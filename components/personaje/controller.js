@@ -5,9 +5,9 @@ async function addCharacter(character){
     return result;   
 };
 
-async function getAll(){
+async function getAll(name, age, movies, weight ){
     return new Promise((resolve, reject) => {
-        resolve(store.getAllCharacter());
+        resolve(store.getAllCharacter(name, age, movies, weight));
     })
 };
 
@@ -15,10 +15,6 @@ async function getAllOnlyNameandImage(){
     return new Promise((resolve, reject) => {
         resolve(store.getAllCharacterOnlyImageandName());
     })
-};
-
-function getCharacterByName(name){
-    return store.getCharacterByName(name)
 };
 
 async function updateCharacter(character){
@@ -49,7 +45,6 @@ async function deleteCharacter(id){
 module.exports = {
     addCharacter,
     getAll,
-    getCharacterByName,
     deleteCharacter,
     updateCharacter,
     getAllOnlyNameandImage,

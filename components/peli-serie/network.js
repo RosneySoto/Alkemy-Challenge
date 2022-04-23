@@ -4,11 +4,7 @@ const response = require('../../network/response');
 const controller = require('./controller');
 
 router.post('/', function(req, res){
-    controller.addFilm(
-        req.body.image,
-        req.body.title,
-        req.body.creationDate,
-        req.body.calification)
+    controller.addFilm(req.body)
             .then(data =>{
                 response.success(req, res, data, 201)
             })
@@ -18,9 +14,22 @@ router.post('/', function(req, res){
 });
 
 router.get('/', function(req, res){
-    controller.getAll()
+    const title = req.query.title;
+    const id = req.query.id;
+    console.log(title)
+    controller.getAll(title, id)
         .then(data => {
-            response.success(req, res, data, 201);
+            response.success(req, res, data, 200);
+        })
+        .catch(err => {
+            response.error(req, res, 'Error al listar las lpeliculas', 500, err)
+        })
+});
+
+router.get('/movies', function(req, res){
+    controller.getAllFilmsOnlyImageandName()
+        .then(data => {
+            response.success(req, res, data, 200);
         })
         .catch(err => {
             response.error(req, res, 'Error al listar las lpeliculas', 500, err)

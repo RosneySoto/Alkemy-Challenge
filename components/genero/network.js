@@ -4,8 +4,9 @@ const controller = require('./controller');
 const response = require('../../network/response');
 
 router.post('/', function(req, res){
-    controller.addGender(req.body.name, req.body.image)
+    controller.addGender(req.body)
         .then(data => {
+            console.log(data)
             response.success(req, res, data, 201)
         })
         .catch(err => {
@@ -14,7 +15,9 @@ router.post('/', function(req, res){
 });
 
 router.get('/', function(req, res){
-    controller.getAllGender()
+    const name = req.query.name;
+    const id = req.query.id;
+    controller.getAllGender(name, id)
         .then(data =>{
             response.success(req, res, data, 200)
         })

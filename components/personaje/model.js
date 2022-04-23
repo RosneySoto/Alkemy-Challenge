@@ -1,5 +1,6 @@
 const { Model, DataTypes} = require('sequelize');
 const sequelize = require('../../db');
+const Film = require('../peli-serie/model');
 
 class Character extends Model {}
 Character.init({

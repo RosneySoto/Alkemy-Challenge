@@ -1,22 +1,14 @@
 const res = require('express/lib/response');
 const store = require('./store');
 
-function addFilm(image, title, creationDate, calification){
-    if(!title){
-        return new Promise.reject('Debe contener un titulo')
-    }
-    const film = {
-        image,
-        title,
-        creationDate,
-        calification
-    }
-    return store.addFilm(film)
+async function addFilm(film){
+    const result = await store.addFilm(film);
+    return result;
 };
 
-async function getAll(){
+async function getAll(title, id){
     return new Promise((resolve, reject) => {
-        resolve(store.getAllFilms());
+        resolve(store.getAllFilms(title, id));
     })
 };
 
@@ -31,6 +23,12 @@ async function updateFilm(film){
     } catch (error) {
         console.log(error);
     }
+};
+
+async function getAllFilmsOnlyImageandName(){
+    return new Promise((resolve, reject) =>{
+        resolve(store.getAllFilmsOnlyImageandName())
+    });
 };
 
 async function deleteFilm(id){
@@ -52,4 +50,5 @@ module.exports ={
     getAll,
     updateFilm,
     deleteFilm,
+    getAllFilmsOnlyImageandName
 }

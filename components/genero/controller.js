@@ -1,20 +1,13 @@
 const store = require('./store');
 
-function addGender(name, image){
-    try {
-        const newGener = {
-            name,
-            image
-        }
-        return store.addGender(newGener);
-    } catch (error) {
-        console.error(error)
-    }
+async function addGender(gender){
+    const result = await store.addGender(gender);
+    return result;
 };
 
-async function getAllGender(){
+async function getAllGender(name, id){
     return new Promise((resolve, reject) =>{
-        resolve(store.getAllGender())
+        resolve(store.getAllGender(name, id))
     });
 };
 

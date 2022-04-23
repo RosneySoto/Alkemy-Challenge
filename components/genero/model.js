@@ -4,7 +4,8 @@ const sequelize = require('../../db');
 class Gender extends Model {}
 Gender.init({
     name:{
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        require: true
     },
     image:{
         type: DataTypes.STRING
@@ -12,7 +13,7 @@ Gender.init({
 },{
     sequelize,
     modelName: 'gender',
-    timestamps: false,
+    // timestamps: false,
 });
 
 module.exports = Gender;
